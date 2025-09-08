@@ -21,7 +21,6 @@ export default function Home() {
     event.preventDefault()
     const answer = questionAnswer()
     playAnswer(`../${answer}.m4a`)
-    setText("")
   }
 
   const playAnswer = (answer: string) => {
@@ -30,6 +29,7 @@ export default function Home() {
       audioElement.src = answer
       audioElement.play().then(() => {
         setIsPlaying(true)
+        setText("")
       })
     }
 
@@ -42,7 +42,7 @@ export default function Home() {
 
   return (
     <div className="flex justify-center">
-      <video ref={videoRef} onClick={(e) => e.currentTarget.play()} muted className="h-screen w-full object-fill">
+      <video ref={videoRef} preload="auto" onClick={(e) => e.currentTarget.play()} muted className="h-screen w-full object-fill">
         <source src="../shell43.mp4" />
         <audio ref={audioRef} onEnded={() => setIsPlaying(false)} />
       </video>
